@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>{store.getState().counter}</div>
+        <div>{store.getState().incrementers.counter}</div>
         <button onClick={() => store.dispatch(incrementCounter())}>
           Increment
         </button>
@@ -27,18 +27,18 @@ function App() {
           <input
             type="text"
             onChange={(e) => store.dispatch(updateN(Number(e.target.value)))}
-            disabled={!store.getState().allowed}
+            disabled={!store.getState().allowable.allowed}
           ></input>{" "}
           <br />
           <button
             onClick={() => store.dispatch(incrementByN())}
-            disabled={!store.getState().allowed}
+            disabled={!store.getState().allowable.allowed}
           >
             Increment by N
           </button>
           <button
             onClick={() => store.dispatch(decrementByN())}
-            disabled={!store.getState().allowed}
+            disabled={!store.getState().allowable.allowed}
           >
             Decrement by N
           </button>

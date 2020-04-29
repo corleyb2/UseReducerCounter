@@ -7,14 +7,7 @@ import {
   ALLOW_INCREMENT_BY_N,
 } from "../actions";
 
-export function reducer(
-  state = {
-    counter: 0,
-    n: 0,
-    allowed: true,
-  },
-  action
-) {
+const incrementers = (state = { counter: 0, n: 0 }, action) => {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return { ...state, counter: state.counter + 1 };
@@ -27,9 +20,23 @@ export function reducer(
       return { ...state, counter: state.counter + state.n };
     case DECREMENT_BY_N:
       return { ...state, counter: state.counter - state.n };
+    default:
+      return state;
+  }
+};
+
+const allowable = (state = { allowed: true }, action) => {
+  switch (action.type) {
     case ALLOW_INCREMENT_BY_N:
       return { ...state, allowed: !state.allowed };
     default:
       return state;
   }
+};
+
+export function reducer(state = {}, action) {
+  return {
+    incrementers: incrementers(state.incrementers, action),
+    allowable: allowable(state.allowable, action),
+  };
 }
