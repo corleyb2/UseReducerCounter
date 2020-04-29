@@ -1,14 +1,9 @@
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 
-const initialState = {
-  counter: 0,
-  n: 0,
-  allowed: true,
-};
-
-export function CreateStore(reducer) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export function CreateStore(reducerfn) {
+  const [state, dispatch] = useReducer(reducerfn, reducerfn(undefined, ""));
   console.log(state);
+  // return { state, dispatch }; but to protect state...
   function getState() {
     return { ...state };
   }
